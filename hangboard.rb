@@ -3,16 +3,22 @@ class Hangboard
 
   def one_rep
     puts 'rest'
-    (0..5).each do |i|
-      print "#{5 - i}\r"
-      sleep 1
-    end
+      countdown(5)
 
     puts 'deadhang'
-    (0..10).each do |i|
-      print "#{10 - i}\r"
+    countdown(10)
+  end
+
+  def countdown(seconds)
+    (0..seconds).each do |i|
+      clear_terminal_line
+      print "#{seconds - i}\r"
       sleep 1
     end
+  end
+
+  def clear_terminal_line
+    print " "*80 + "\r"
   end
 end
 
