@@ -13,10 +13,10 @@ class Hangboard
   end
 
   def countdown(seconds)
-    seconds.downto(0) do |i|
+    seconds.downto(1) do |i|
       clear_terminal_line
       print "\r#{i}"
-      @sayer.say i if i < 3
+      @sayer.say i if i <= 3
       @waiter.wait
     end
   end
