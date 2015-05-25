@@ -7,16 +7,16 @@ class Hangboard
   def workout(holds: 9)
     holds.times do |i|
       rest_between_holds if i > 0
-      puts "starting hold #{i}"
+      @reporter.puts "starting hold #{i}"
       one_hold
     end
   end
 
   def one_rep
-    puts "\rrest"
+    @reporter.report "rest"
       countdown(5)
 
-    puts "\rdeadhang"
+      @reporter.report "deadhang"
     countdown(10)
   end
 
@@ -31,7 +31,7 @@ class Hangboard
 
   def one_hold
     6.times do |i|
-      puts "\rstarting rep #{i}"
+      @reporter.puts "\rstarting rep #{i}"
       one_rep
     end
   end
@@ -58,5 +58,14 @@ end
 class Reporter
   def say(phrase)
     Thread.new{ `say #{phrase}`}
+  end
+
+  def report(phrase)
+    puts "\r#{phrase}"
+    say(phrase)
+  end
+
+  def puts(phrase)
+    $stdout.puts phrase
   end
 end

@@ -3,8 +3,8 @@ require 'rspec'
 
 describe Hangboard do
   describe "workout" do
-    let(:reporter){object_double(Reporter.new, :say => true)}
-    let(:waiter){ object_double(Waiter.new, :wait => true, rest: true) }
+    let(:reporter){object_double(Reporter.new, say: true, report: true, puts: true)}
+    let(:waiter){ object_double(Waiter.new, wait: true, rest: true) }
 
     it "demands 6 reps per hold" do
     setup
