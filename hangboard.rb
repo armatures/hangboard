@@ -1,5 +1,8 @@
 
 class Hangboard
+  def initialize
+    @waiter = Waiter.new
+  end
 
   def one_rep
     puts 'rest'
@@ -13,13 +16,30 @@ class Hangboard
     (0..seconds).each do |i|
       clear_terminal_line
       print "#{seconds - i}\r"
-      sleep 1
+      @waiter.wait
     end
   end
 
   def clear_terminal_line
     print " "*80 + "\r"
   end
+
+  def one_hold
+    6.times do |i|
+      puts "starting rep #{i}"
+      one_rep
+    end
+  end
+
+  def workout
+    one_hold
+  end
 end
 
-Hangboard.new.one_rep
+class Waiter
+  def wait
+    sleep 1
+  end
+end
+
+#Hangboard.new.workout
