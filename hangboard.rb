@@ -1,7 +1,7 @@
 class Hangboard
   def initialize
     @waiter = Waiter.new
-    @sayer = Sayer.new
+    @reporter = Reporter.new
   end
 
   def workout(holds: 9)
@@ -24,7 +24,7 @@ class Hangboard
     seconds.downto(1) do |i|
       clear_terminal_line
       print "\r#{i}"
-      @sayer.say i if i <= 3
+      @reporter.say i if i <= 3
       @waiter.wait
     end
   end
@@ -55,7 +55,7 @@ class Waiter
   end
 end
 
-class Sayer
+class Reporter
   def say(phrase)
     Thread.new{ `say #{phrase}`}
   end
