@@ -18,6 +18,13 @@ describe Hangboard do
     subject.one_rep
    end
 
+   it "counts down, not up" do
+    setup
+
+    expect(sayer).to receive(:say).with(1).exactly(2).times
+    subject.one_rep
+   end
+
    def setup
     waiter = object_double(Waiter.new, :wait => true)
     allow(Waiter).to receive(:new).and_return(waiter)
