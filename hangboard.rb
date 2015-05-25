@@ -5,28 +5,28 @@ class Hangboard
   end
 
   def one_rep
-    puts 'rest'
+    puts "\rrest"
       countdown(5)
 
-    puts 'deadhang'
+    puts "\rdeadhang"
     countdown(10)
   end
 
   def countdown(seconds)
     (0..seconds).each do |i|
       clear_terminal_line
-      print "#{seconds - i}\r"
+      print "\r#{seconds - i}"
       @waiter.wait
     end
   end
 
   def clear_terminal_line
-    print " "*80 + "\r"
+    print "\r" + " " * 80
   end
 
   def one_hold
     6.times do |i|
-      puts "starting rep #{i}"
+      puts "\rstarting rep #{i}"
       one_rep
     end
   end
