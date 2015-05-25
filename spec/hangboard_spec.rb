@@ -4,7 +4,7 @@ require 'rspec'
 describe Hangboard do
   describe "workout" do
     let(:reporter){object_double(Reporter.new, say: true, report: true, puts: true)}
-    let(:waiter){ object_double(Waiter.new, wait: true, rest: true) }
+    let(:waiter){ object_double(Waiter.new, wait: true, rest_between_holds: true) }
 
     it "demands 6 reps per hold" do
     setup
@@ -37,14 +37,14 @@ describe Hangboard do
    it "defaults the number of holds in a workout to 9" do
      setup
 
-     expect(waiter).to receive(:rest).exactly(8).times
+     expect(waiter).to receive(:rest_between_holds).exactly(8).times
      subject.workout
    end
 
    it "holds in a workout are separated by rests" do
      setup
 
-     expect(waiter).to receive(:rest).exactly(1).times
+     expect(waiter).to receive(:rest_between_holds).exactly(1).times
      subject.workout(holds:2)
    end
 

@@ -6,7 +6,7 @@ class Hangboard
 
   def workout(holds: 9)
     holds.times do |i|
-      rest_between_holds if i > 0
+      @waiter.rest_between_holds(@reporter) if i > 0
       @reporter.puts "starting hold #{i}"
       one_hold
     end
@@ -39,19 +39,17 @@ class Hangboard
   def clear_terminal_line
     print "\r" + " " * 80
   end
-
-  def rest_between_holds
-    @waiter.rest
-  end
 end
 
 class Waiter
-  def wait
-    sleep 1
+  def wait(seconds:1)
+    sleep seconds
   end
 
-  def rest
-    sleep 3*60
+  def rest_between_holds(reporter)
+    sleep 2.5*60
+    reporter.say 'thirty seconds rest remaining'
+    sleep 30
   end
 end
 
