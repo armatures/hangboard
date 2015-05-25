@@ -1,6 +1,7 @@
 class Hangboard
   def initialize
     @waiter = Waiter.new
+    @sayer = Sayer.new
   end
 
   def one_rep
@@ -15,6 +16,7 @@ class Hangboard
     (0..seconds).each do |i|
       clear_terminal_line
       print "\r#{seconds - i}"
+      @sayer.say i if seconds - i < 3
       @waiter.wait
     end
   end
@@ -38,5 +40,11 @@ end
 class Waiter
   def wait
     sleep 1
+  end
+end
+
+class Sayer
+  def say(phrase)
+    `say #{phrase}`
   end
 end
