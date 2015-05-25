@@ -41,5 +41,3 @@ class Waiter
     sleep 1
   end
 end
-
-#Hangboard.new.workout
