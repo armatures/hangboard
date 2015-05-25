@@ -45,6 +45,6 @@ end
 
 class Sayer
   def say(phrase)
-    `say #{phrase}`
+    Thread.new{ `say #{phrase}`}
   end
 end
