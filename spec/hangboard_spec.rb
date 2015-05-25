@@ -34,10 +34,10 @@ describe Hangboard do
      subject.workout(holds: 3)
    end
 
-   it "defaults the number of holds in a workout to 1" do
+   it "defaults the number of holds in a workout to 9" do
      setup
 
-     expect(waiter).not_to receive(:rest)
+     expect(waiter).to receive(:rest).exactly(8).times
      subject.workout
    end
 

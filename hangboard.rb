@@ -4,6 +4,14 @@ class Hangboard
     @sayer = Sayer.new
   end
 
+  def workout(holds: 9)
+    holds.times do |i|
+      rest_between_holds if i > 0
+      puts "starting hold #{i}"
+      one_hold
+    end
+  end
+
   def one_rep
     puts "\rrest"
       countdown(5)
@@ -25,13 +33,6 @@ class Hangboard
     6.times do |i|
       puts "\rstarting rep #{i}"
       one_rep
-    end
-  end
-
-  def workout(holds: 1)
-    holds.times do |i|
-      rest_between_holds if holds - i > 1
-      one_hold
     end
   end
 

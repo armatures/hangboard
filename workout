@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 require_relative 'hangboard'
-
+puts 'starting workout!'
 Hangboard.new.workout
