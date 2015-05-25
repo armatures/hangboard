@@ -21,10 +21,6 @@ class Hangboard
     end
   end
 
-  def clear_terminal_line
-    print "\r" + " " * 80
-  end
-
   def one_hold
     6.times do |i|
       puts "\rstarting rep #{i}"
@@ -32,14 +28,29 @@ class Hangboard
     end
   end
 
-  def workout
-    one_hold
+  def workout(holds: 1)
+    holds.times do |i|
+      rest_between_holds if holds - i > 1
+      one_hold
+    end
+  end
+
+  def clear_terminal_line
+    print "\r" + " " * 80
+  end
+
+  def rest_between_holds
+    @waiter.rest
   end
 end
 
 class Waiter
   def wait
     sleep 1
+  end
+
+  def rest
+    sleep 3*60
   end
 end
 

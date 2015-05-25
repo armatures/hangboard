@@ -4,7 +4,9 @@ require 'rspec'
 describe Hangboard do
   describe "workout" do
     let(:sayer){object_double(Sayer.new, :say => true)}
-   it "counts down" do
+    let(:waiter){ object_double(Waiter.new, :wait => true, rest: true) }
+
+    it "demands 6 reps per hold" do
     setup
 
     expect(subject).to receive(:one_rep).exactly(6).times
@@ -25,8 +27,28 @@ describe Hangboard do
     subject.one_rep
    end
 
+   it "accepts an argument for the number of holds to hang on" do
+     setup
+
+     expect(subject).to receive(:one_hold).exactly(3).times
+     subject.workout(holds: 3)
+   end
+
+   it "defaults the number of holds in a workout to 1" do
+     setup
+
+     expect(waiter).not_to receive(:rest)
+     subject.workout
+   end
+
+   it "holds in a workout are separated by rests" do
+     setup
+
+     expect(waiter).to receive(:rest).exactly(1).times
+     subject.workout(holds:2)
+   end
+
    def setup
-    waiter = object_double(Waiter.new, :wait => true)
     allow(Waiter).to receive(:new).and_return(waiter)
     allow(Sayer).to receive(:new).and_return(sayer)
    end
